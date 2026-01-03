@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-add-fk-and-indexes
+      author: library
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: borrow_transactions
+            baseColumnNames: book_id
+            referencedTableName: books
+            referencedColumnNames: id
+            constraintName: fk_borrow_book
+
+        - addForeignKeyConstraint:
+            baseTableName: borrow_transactions
+            baseColumnNames: member_id
+            referencedTableName: members
+            referencedColumnNames: id
+            constraintName: fk_borrow_member
+
+        - createIndex:
+            tableName: borrow_transactions
+            indexName: idx_borrow_book
+            columns:
+              - column:
+                  name: book_id
+
+        - createIndex:
+            tableName: borrow_transactions
+            indexName: idx_borrow_member
+            columns:
+              - column:
+                  name: member_id
